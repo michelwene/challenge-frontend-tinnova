@@ -1,10 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter as Manrope } from 'next/font/google'
+import { useState } from 'react'
+import { FormCreateOrAlterUser } from '~features'
 
-const manrope = Manrope({ subsets: ['latin'] })
+const manrope = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600'],
+})
 
 export default function Home() {
+  const [isCreate, setIsCreate] = useState(false)
   return (
     <>
       <Head>
@@ -51,8 +56,12 @@ export default function Home() {
                 width: '100%',
               }}
             >
-              <button>Tabela de usuários</button>
-              <button>Cadastro de usuários</button>
+              <button onClick={() => setIsCreate(false)}>
+                Tabela de usuários
+              </button>
+              <button onClick={() => setIsCreate(true)}>
+                Cadastro de usuários
+              </button>
             </div>
             <div
               style={{
@@ -60,24 +69,36 @@ export default function Home() {
                 flex: 1,
               }}
             >
-              <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>E-mail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align='center'>sd asdasd asdaasda dasdas</td>
-                    <td align='center'>231423423</td>
-                    <td align='center'>1231234234</td>
-                    <td align='center'>asdsd@dasdas.com</td>
-                  </tr>
-                </tbody>
-              </table>
+              {isCreate ? (
+                <FormCreateOrAlterUser />
+              ) : (
+                <table
+                  style={{
+                    borderCollapse: 'collapse',
+                    tableLayout: 'fixed',
+                    width: '100%',
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>CPF</th>
+                      <th>Telefone</th>
+                      <th>E-mail</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td align='center'>sd asdasd asdaasda dasdas</td>
+                      <td align='center'>231423423</td>
+                      <td align='center'>1231234234</td>
+                      <td align='center'>asdsd@dasdas.com</td>
+                      <td align='center'>asdsd@dasdas.com</td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>

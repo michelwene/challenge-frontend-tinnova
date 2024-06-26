@@ -22,9 +22,15 @@
       "~hooks": ["src/@hooks/index"],
       "~types/*": ["src/@types/*"],
       "~utils": ["src/@utils/index"],
+      "~styles/*": ["src/styles/*"],
+
+      /* components  */
+      "~form": ["src/components/@form/index"],
+      "~icons": ["src/components/@icons/index"],
+      "~ui": ["src/components/@ui/index"],
 
       /* features */
-      "~features/*": ["src/features/index"]
+      "~features": ["src/features/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs"],
