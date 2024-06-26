@@ -1,12 +1,37 @@
-import { InputHTMLAttributes, forwardRef, type Ref } from 'react'
+import { forwardRef, type Ref, useState } from 'react'
 
-type InputComponentProps = {} & InputHTMLAttributes<HTMLInputElement>
+import type { InputHTMLAttributes } from 'react'
+
+import * as S from './styles'
+
+type InputComponentProps = {
+  error: boolean
+  label: string
+} & InputHTMLAttributes<HTMLInputElement>
 
 const InputComponent = (
-  { ...rest }: InputComponentProps,
+  { error, label, name, value, ...rest }: InputComponentProps,
   ref: Ref<HTMLInputElement>,
 ) => {
-  return <input ref={ref} type={'text'} {...rest} />
+  const [focused, setFocused] = useState(false)
+  return (
+    <S.Container>
+      <S.Label $focused={focused || !!value} htmlFor={name}>
+        {label}
+      </S.Label>
+      <S.Input
+        $error={error}
+        id={name}
+        name={name}
+        onBlur={() => setFocused(false)}
+        onFocus={() => setFocused(true)}
+        ref={ref}
+        type={'text'}
+        value={value}
+        {...rest}
+      />
+    </S.Container>
+  )
 }
 
 export const FormInput = forwardRef<HTMLInputElement, InputComponentProps>(

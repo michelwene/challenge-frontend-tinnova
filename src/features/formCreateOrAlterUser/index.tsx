@@ -1,13 +1,39 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { ButtonSubmit, FormInput } from '~form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { isCPF, isPhone } from 'brazilian-values'
+import type { SubmitHandler } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+import { ButtonSubmit, FormInput, FormItem } from '~form'
+import { maskDocument, maskPhoneNumber } from '~utils'
+
+import * as S from './styles'
 
 const formSchema = z.object({
-  name: z.string().min(3),
-  document: z.string().length(11),
-  phone: z.string().length(11),
-  email: z.string().email(),
+  name: z
+    .string({
+      required_error: 'Nome é obrigatório',
+    })
+    .min(3, 'Campo deve conter 3 caracteres ou mais'),
+  document: z
+    .string({
+      required_error: 'CPF é obrigatório',
+    })
+    .refine((value) => {
+      return isCPF(value)
+    }, 'CPF inválido'),
+  phone: z
+    .string({
+      required_error: 'Telefone é obrigatório',
+    })
+    .refine((value) => {
+      return isPhone(value)
+    }, 'Telefone inválido'),
+  email: z
+    .string({
+      required_error: 'E-mail é obrigatório',
+    })
+    .email('E-mail inválido'),
 })
 
 type FormInputs = z.infer<typeof formSchema>
@@ -31,38 +57,79 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
     console.log(formData)
   }
 
+  const hasErrors = Object.keys(errors).length > 0
+
   return (
-    <form
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.5rem',
-      }}
-      onSubmit={handleSubmit(handleFormSubmit)}
-    >
-      <Controller
-        name='name'
-        control={control}
-        render={({ field }) => <FormInput {...field} />}
-      />
-      <Controller
-        name='document'
-        control={control}
-        render={({ field }) => <FormInput {...field} />}
-      />
-      <Controller
-        name='phone'
-        control={control}
-        render={({ field }) => <FormInput {...field} />}
-      />
-      <Controller
-        name='email'
-        control={control}
-        render={({ field }) => <FormInput {...field} />}
-      />
-      <ButtonSubmit>
-        {isEditing ? 'Editar usuário' : 'Criar usuário'}
+    <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+      <FormItem error={errors.name?.message}>
+        <Controller
+          name='name'
+          control={control}
+          render={({ field: { name, onChange, ref, value } }) => (
+            <FormInput
+              error={!!errors.name?.message}
+              label='Nome completo (sem abreviações)'
+              name={name}
+              onChange={onChange}
+              ref={ref}
+              value={value}
+            />
+          )}
+        />
+      </FormItem>
+      <FormItem error={errors.email?.message}>
+        <Controller
+          name='email'
+          control={control}
+          render={({ field: { name, onChange, ref, value } }) => (
+            <FormInput
+              error={!!errors.email?.message}
+              label='E-mail'
+              name={name}
+              onChange={onChange}
+              ref={ref}
+              value={value}
+            />
+          )}
+        />
+      </FormItem>
+      <FormItem error={errors.document?.message}>
+        <Controller
+          name='document'
+          control={control}
+          render={({ field: { name, onChange, ref, value } }) => (
+            <FormInput
+              error={!!errors.document?.message}
+              label='CPF'
+              name={name}
+              onChange={(event) => onChange(maskDocument(event.target.value))}
+              ref={ref}
+              value={value}
+            />
+          )}
+        />
+      </FormItem>
+      <FormItem error={errors.phone?.message}>
+        <Controller
+          name='phone'
+          control={control}
+          render={({ field: { name, onChange, ref, value } }) => (
+            <FormInput
+              error={!!errors.phone?.message}
+              label='Telefone'
+              name={name}
+              onChange={(event) =>
+                onChange(maskPhoneNumber(event.target.value))
+              }
+              ref={ref}
+              value={value}
+            />
+          )}
+        />
+      </FormItem>
+      <ButtonSubmit disabled={hasErrors}>
+        {isEditing ? 'Editar usuário' : 'Cadastrar'}
       </ButtonSubmit>
-    </form>
+    </S.Form>
   )
 }

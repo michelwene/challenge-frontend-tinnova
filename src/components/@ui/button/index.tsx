@@ -1,18 +1,26 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, Ref, forwardRef } from 'react'
+import { forwardRef } from 'react'
 
-type ButtonProps = DetailedHTMLProps<
+import type { ButtonHTMLAttributes, DetailedHTMLProps, Ref } from 'react'
+
+import { Spin } from '../spin'
+
+import * as S from './styles'
+
+type ButtonProps = {
+  loading?: boolean
+} & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >
 
 export const ButtonComponent = (
-  { children, ...rest }: ButtonProps,
+  { children, disabled, loading = false, ...rest }: ButtonProps,
   ref: Ref<HTMLButtonElement>,
 ) => {
   return (
-    <button ref={ref} {...rest}>
-      {children}
-    </button>
+    <S.Button $loading={loading} disabled={disabled} ref={ref} {...rest}>
+      {loading ? <Spin /> : children}
+    </S.Button>
   )
 }
 
