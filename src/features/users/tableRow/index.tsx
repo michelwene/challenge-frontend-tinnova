@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { type User, useUsersStorage } from '~hooks'
+import { useNotification, type User, useUsersStorage } from '~hooks'
 
 import { ActionButtons } from './actionButtons'
 import * as S from './styles'
@@ -14,12 +14,17 @@ export const TableRow = ({ user, onEdit }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { deleteUser } = useUsersStorage()
+  const { showNotification } = useNotification()
 
   const handleDelete = () => {
     setIsLoading(true)
     setTimeout(() => {
       deleteUser(user.id)
       setIsLoading(false)
+      showNotification({
+        message: 'Usuário excluído com sucesso',
+        type: 'success',
+      })
     }, 200)
   }
 

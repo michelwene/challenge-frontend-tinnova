@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 import { Divider as UIDivider } from '~ui'
 
+type TableProps = {
+  $isEmpty: boolean
+}
+
 export const Divider = styled(UIDivider)`
   display: none;
   @media (max-width: 768px) {
@@ -9,7 +13,7 @@ export const Divider = styled(UIDivider)`
   }
 `
 
-export const Table = styled.table`
+export const Table = styled.table<TableProps>`
   border-collapse: separate;
   border-spacing: 0;
   user-select: none;
@@ -20,10 +24,14 @@ export const Table = styled.table`
 
   th,
   td {
-    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    border-bottom: ${({ theme }) => `1px solid ${theme.colors.border}`};
     overflow: hidden;
     text-align: start;
     text-overflow: ellipsis;
+  }
+
+  td {
+    ${({ $isEmpty }) => $isEmpty && 'border-bottom: none;'}
   }
 
   th {
@@ -47,14 +55,14 @@ export const Table = styled.table`
 
   @media (max-width: 768px) {
     thead tr {
-      display: none;
+      display: ${({ $isEmpty }) => !$isEmpty && 'none'};
     }
   }
 `
 
-export const TableBody = styled.tbody`
+export const TableBody = styled.tbody<TableProps>`
   @media (max-width: 768px) {
-    display: flex;
+    display: ${({ $isEmpty }) => !$isEmpty && 'flex'};
     flex-direction: column;
   }
 `

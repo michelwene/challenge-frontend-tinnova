@@ -15,7 +15,7 @@ export const Users = () => {
   }
 
   return (
-    <S.Table>
+    <S.Table $isEmpty={!users.length}>
       <thead>
         <tr>
           <th>Nome</th>
@@ -25,7 +25,7 @@ export const Users = () => {
           <th>Ações</th>
         </tr>
       </thead>
-      <S.TableBody>
+      <S.TableBody $isEmpty={!users.length}>
         {!!users.length ? (
           users.map((user, index) => {
             const isLastIndex = index === users.length - 1

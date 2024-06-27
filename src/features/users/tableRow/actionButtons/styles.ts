@@ -24,11 +24,11 @@ export const ActionText = styled.span`
   }
 `
 
-export const DeleteIcon = styled(ICONSEditIcon)`
+export const DeleteIcon = styled(ICONSDeleteIcon)`
   flex-shrink: 0;
 `
 
-export const EditIcon = styled(ICONSDeleteIcon)`
+export const EditIcon = styled(ICONSEditIcon)`
   flex-shrink: 0;
 `
 
