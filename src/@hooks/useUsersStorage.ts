@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 
 import { useLocalStorage } from '@mantine/hooks'
 import { v4 as uuidv4 } from 'uuid'
@@ -12,6 +12,7 @@ type UsersStorage = User[] | undefined
 export const USERS_STORAGE = '@tinnova-users-selection-v1.0.0'
 
 export const useUsersStorage = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [storedUsers, setStoredUsers] = useLocalStorage<UsersStorage>({
     key: USERS_STORAGE,
     getInitialValueInEffect: false,
@@ -55,6 +56,7 @@ export const useUsersStorage = () => {
 
   const fetchUsers = useCallback(async () => {
     try {
+      setIsLoading(true)
       const data = await usersService.getUsers()
       const formattedData = data.map((user) => ({ ...user, id: uuidv4() }))
       setStoredUsers(formattedData)
@@ -63,6 +65,8 @@ export const useUsersStorage = () => {
         message: 'Erro ao buscar usuários',
         type: 'error',
       })
+    } finally {
+      setIsLoading(false)
     }
   }, [setStoredUsers, showNotification])
 
@@ -74,5 +78,5 @@ export const useUsersStorage = () => {
     }
   }, [fetchUsers, storedUsers])
 
-  return { users: storedUsers, createUser, editUser, deleteUser }
+  return { isLoading, users: storedUsers, createUser, editUser, deleteUser }
 }
