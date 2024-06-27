@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 
 import { useUsersStorage } from '~hooks'
 import { PageLayout } from '~layout'
+import { maskCpf, maskPhoneNumber } from '~utils'
 
 import { FormCreateOrAlterUser } from 'src/features'
 
@@ -16,10 +17,10 @@ export default function EditUser() {
       <FormCreateOrAlterUser
         defaultValues={{
           name: userById?.name || '',
-          cpf: userById?.cpf || '',
+          cpf: maskCpf(userById?.cpf || '') ?? '',
           id: userById?.id || '',
           email: userById?.email || '',
-          phone: userById?.phone || '',
+          phone: maskPhoneNumber(userById?.phone || '') ?? '',
         }}
       />
     </PageLayout>

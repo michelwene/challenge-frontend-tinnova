@@ -9,7 +9,7 @@ import { z } from 'zod'
 
 import { ButtonSubmit, FormInput, FormItem } from '~form'
 import { useNotification, useUsersStorage } from '~hooks'
-import { maskCpf, maskPhoneNumber } from '~utils'
+import { maskCpf, maskPhoneNumber, unMaskValue } from '~utils'
 
 import * as S from './styles'
 const formSchema = z.object({
@@ -69,6 +69,8 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
         editUser({
           ...formData,
           id: defaultValues?.id,
+          cpf: unMaskValue(formData.cpf),
+          phone: unMaskValue(formData.phone),
         })
         showNotification({
           message: 'Usuário editado com sucesso!',
@@ -83,6 +85,8 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
       createUser({
         ...formData,
         id: uuidv4(),
+        cpf: unMaskValue(formData.cpf),
+        phone: unMaskValue(formData.phone),
       })
       showNotification({
         message: 'Usuário criado com sucesso!',

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { useNotification, useUsersStorage } from '~hooks'
+import { maskCpf, maskPhoneNumber } from '~utils'
 
 import type { User } from 'src/@types/users'
 
@@ -38,11 +39,11 @@ export const TableRow = ({ user, onEdit }: Props) => {
       </S.TableItem>
       <S.TableItem>
         <S.ResponsiveTitle>CPF: </S.ResponsiveTitle>
-        {user.cpf}
+        {maskCpf(user.cpf)}
       </S.TableItem>
       <S.TableItem>
         <S.ResponsiveTitle>Telefone: </S.ResponsiveTitle>
-        {user.phone}
+        {maskPhoneNumber(user.phone)}
       </S.TableItem>
       <S.TableItem title={user.email}>
         <S.ResponsiveTitle>E-mail: </S.ResponsiveTitle>
