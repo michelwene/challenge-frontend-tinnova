@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
     "@mantine/hooks": "^7.10.2",
+    "axios": "^1.7.2",
     "brazilian-values": "^0.13.0",
     "next": "14.2.4",
     "react": "^18",

@@ -16,7 +16,7 @@ export default function EditUser() {
       <FormCreateOrAlterUser
         defaultValues={{
           name: userById?.name || '',
-          document: userById?.document || '',
+          cpf: userById?.cpf || '',
           id: userById?.id || '',
           email: userById?.email || '',
           phone: userById?.phone || '',

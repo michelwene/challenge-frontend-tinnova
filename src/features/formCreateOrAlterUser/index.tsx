@@ -9,7 +9,7 @@ import { z } from 'zod'
 
 import { ButtonSubmit, FormInput, FormItem } from '~form'
 import { useNotification, useUsersStorage } from '~hooks'
-import { maskDocument, maskPhoneNumber } from '~utils'
+import { maskCpf, maskPhoneNumber } from '~utils'
 
 import * as S from './styles'
 const formSchema = z.object({
@@ -18,7 +18,7 @@ const formSchema = z.object({
       required_error: 'Nome é obrigatório',
     })
     .min(3, 'Campo deve conter 3 caracteres ou mais'),
-  document: z
+  cpf: z
     .string({
       required_error: 'CPF é obrigatório',
     })
@@ -90,7 +90,7 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
       })
       reset({
         name: '',
-        document: '',
+        cpf: '',
         phone: '',
         email: '',
       })
@@ -138,18 +138,18 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
           )}
         />
       </FormItem>
-      <FormItem error={errors.document?.message}>
+      <FormItem error={errors.cpf?.message}>
         <Controller
-          name='document'
+          name='cpf'
           control={control}
           render={({ field: { name, onChange, ref, value } }) => (
             <FormInput
               autoComplete='off'
               disabled={isLoading}
-              error={!!errors.document?.message}
+              error={!!errors.cpf?.message}
               label='CPF'
               name={name}
-              onChange={(event) => onChange(maskDocument(event.target.value))}
+              onChange={(event) => onChange(maskCpf(event.target.value))}
               ref={ref}
               value={value}
             />

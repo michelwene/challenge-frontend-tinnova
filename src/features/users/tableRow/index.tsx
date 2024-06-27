@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-import { useNotification, type User, useUsersStorage } from '~hooks'
+import { useNotification, useUsersStorage } from '~hooks'
+
+import type { User } from 'src/@types/users'
 
 import { ActionButtons } from './actionButtons'
 import * as S from './styles'
@@ -36,7 +38,7 @@ export const TableRow = ({ user, onEdit }: Props) => {
       </S.TableItem>
       <S.TableItem>
         <S.ResponsiveTitle>CPF: </S.ResponsiveTitle>
-        {user.document}
+        {user.cpf}
       </S.TableItem>
       <S.TableItem>
         <S.ResponsiveTitle>Telefone: </S.ResponsiveTitle>

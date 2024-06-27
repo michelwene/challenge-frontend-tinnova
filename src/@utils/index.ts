@@ -1,2 +1,2 @@
-export * from './maskDocument'
+export * from './maskCpf'
 export * from './maskPhoneNumber'
