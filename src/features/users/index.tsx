@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { useUsersStorage } from '~hooks'
+import { Empty } from '~ui'
 
 import { TableRow } from './tableRow'
 export const Users = () => {
@@ -29,13 +30,21 @@ export const Users = () => {
         </tr>
       </thead>
       <tbody>
-        {users.map((user) => (
-          <TableRow
-            key={user.id}
-            onEdit={() => handleEdit(user.id)}
-            user={user}
-          />
-        ))}
+        {!!users.length ? (
+          users.map((user) => (
+            <TableRow
+              key={user.id}
+              onEdit={() => handleEdit(user.id)}
+              user={user}
+            />
+          ))
+        ) : (
+          <tr>
+            <td colSpan={5}>
+              <Empty message='Nenhum usuário cadastrado' />
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   )

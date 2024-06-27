@@ -10,12 +10,16 @@ type ButtonProps = {
 }
 
 export const Button = styled.button<ButtonProps>`
+  align-items: center;
   border: none;
-
-  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 
   min-height: 32px;
   min-width: 32px;
+
+  transition: all 0.2s;
 
   &:hover {
     opacity: 0.7;

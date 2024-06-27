@@ -1,3 +1,6 @@
 export * from './deleteIcon'
 export * from './editIcon'
 export * from './loadingIcon'
+export * from './team'
+export * from './user'
+export * from './userAdd'
