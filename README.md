@@ -1,7 +1,5 @@
 # README.MD
 
-![https://www.notion.so./images/logo.sample.png](https://www.notion.so./images/logo.sample.png)
-
 # Lista de usuários ·
 
 ![https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)
