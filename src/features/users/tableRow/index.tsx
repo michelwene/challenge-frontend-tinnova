@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
 import { type User, useUsersStorage } from '~hooks'
-import { DeleteIcon, EditIcon } from '~icons'
-import { IconButton } from '~ui'
 
+import { ActionButtons } from './actionButtons'
 import * as S from './styles'
 
 type Props = {
@@ -25,32 +24,30 @@ export const TableRow = ({ user, onEdit }: Props) => {
   }
 
   return (
-    <tr>
-      <S.TableItem align='center' title={user.name}>
-        {user.name}
+    <S.TableRow>
+      <S.TableItem title={user.name}>
+        <S.ResponsiveTitle>Nome: </S.ResponsiveTitle>
+        <S.Text>{user.name}</S.Text>
       </S.TableItem>
-      <S.TableItem align='center'>{user.document}</S.TableItem>
-      <S.TableItem align='center'>{user.phone}</S.TableItem>
-      <S.TableItem align='center' title={user.email}>
+      <S.TableItem>
+        <S.ResponsiveTitle>CPF: </S.ResponsiveTitle>
+        {user.document}
+      </S.TableItem>
+      <S.TableItem>
+        <S.ResponsiveTitle>Telefone: </S.ResponsiveTitle>
+        {user.phone}
+      </S.TableItem>
+      <S.TableItem title={user.email}>
+        <S.ResponsiveTitle>E-mail: </S.ResponsiveTitle>
         {user.email}
       </S.TableItem>
-      <S.TableItem align='center'>
-        <div
-          style={{
-            display: 'flex',
-            gap: '0.5rem',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <IconButton onClick={onEdit}>
-            <EditIcon size={14} />
-          </IconButton>
-          <IconButton danger={true} onClick={handleDelete} loading={isLoading}>
-            <DeleteIcon size={14} />
-          </IconButton>
-        </div>
+      <S.TableItem>
+        <ActionButtons
+          loading={isLoading}
+          onDelete={handleDelete}
+          onEdit={onEdit}
+        />
       </S.TableItem>
-    </tr>
+    </S.TableRow>
   )
 }

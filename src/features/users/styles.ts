@@ -1,5 +1,14 @@
 import styled from 'styled-components'
 
+import { Divider as UIDivider } from '~ui'
+
+export const Divider = styled(UIDivider)`
+  display: none;
+  @media (max-width: 768px) {
+    display: inline;
+  }
+`
+
 export const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0;
@@ -27,7 +36,25 @@ export const Table = styled.table`
     text-align: left;
   }
 
+  th:last-child {
+    text-align: right;
+    width: 100px;
+  }
+
   tr:hover {
     background-color: #f2f2f2;
+  }
+
+  @media (max-width: 768px) {
+    thead tr {
+      display: none;
+    }
+  }
+`
+
+export const TableBody = styled.tbody`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 `

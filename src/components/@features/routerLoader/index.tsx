@@ -10,7 +10,7 @@ type Props = {
 export const RouterLoader = ({ isOpen }: Props) => {
   return (
     <S.Container $isOpen={isOpen}>
-      <Spin color={theme.colors.text} size='xlarge' />
+      <Spin color={theme.colors.primary} size='xlarge' />
     </S.Container>
   )
 }

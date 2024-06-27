@@ -25,15 +25,21 @@ export const Users = () => {
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody>
+      <S.TableBody>
         {!!users.length ? (
-          users.map((user) => (
-            <TableRow
-              key={user.id}
-              onEdit={() => handleEdit(user.id)}
-              user={user}
-            />
-          ))
+          users.map((user, index) => {
+            const isLastIndex = index === users.length - 1
+            return (
+              <>
+                <TableRow
+                  key={user.id}
+                  onEdit={() => handleEdit(user.id)}
+                  user={user}
+                />
+                {!isLastIndex && <S.Divider />}
+              </>
+            )
+          })
         ) : (
           <tr>
             <td colSpan={5}>
@@ -41,7 +47,7 @@ export const Users = () => {
             </td>
           </tr>
         )}
-      </tbody>
+      </S.TableBody>
     </S.Table>
   )
 }

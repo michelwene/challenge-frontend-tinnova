@@ -6,4 +6,8 @@ export const Form = styled.form`
   gap: 1.5rem;
 
   padding-top: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 `

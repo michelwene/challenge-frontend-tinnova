@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import type { ReactNode } from 'react'
 
-import { UserAddIcon, UserIcon } from '~icons'
 import { Button } from '~ui'
 
 import * as S from './styles'
@@ -39,7 +38,7 @@ export const PageLayout = ({ children }: Props) => {
               size='middle'
               onClick={() => router.push('/')}
             >
-              <UserIcon size={18} />
+              <S.UserIcon size={18} />
               Tabela de usuários
             </Button>
             <Button
@@ -48,7 +47,7 @@ export const PageLayout = ({ children }: Props) => {
               size='middle'
               onClick={() => router.push('/user/create')}
             >
-              <UserAddIcon size={18} />
+              <S.UserAddIcon size={18} />
               Cadastro de usuários
             </Button>
           </S.HeaderContainer>

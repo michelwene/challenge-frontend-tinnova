@@ -22,7 +22,7 @@ type LoaderProviderProps = {
 }
 
 export const LoaderProvider = ({ children }: LoaderProviderProps) => {
-  const [customLoaderState, setCustomLoaderState] = useState(true)
+  const [customLoaderState, setCustomLoaderState] = useState(false)
 
   const handleStart = () => {
     setCustomLoaderState(true)

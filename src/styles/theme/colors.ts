@@ -9,6 +9,7 @@ export const colors = {
   placeholder: '#A2A2A2',
   primary: '#00c8b3',
   primaryFocus: '#333333',
+  scrollbarThumb: '#BFBFBF',
   secondary: '#e6fff8',
   text: '#454851',
   textDisabled: '#dddcdc',
