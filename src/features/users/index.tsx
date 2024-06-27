@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useUsersStorage } from '~hooks'
 import { DeleteIcon, EditIcon } from '~icons'
 import { IconButton } from '~ui'
@@ -5,6 +7,11 @@ import { IconButton } from '~ui'
 import * as S from './styles'
 export const Users = () => {
   const { users } = useUsersStorage()
+  const router = useRouter()
+
+  const handleEdit = (id: string) => {
+    void router.push(`/user/edit/${id}`)
+  }
 
   return (
     <table
@@ -43,7 +50,7 @@ export const Users = () => {
                   justifyContent: 'center',
                 }}
               >
-                <IconButton>
+                <IconButton onClick={() => handleEdit(user.id)}>
                   <EditIcon size={14} />
                 </IconButton>
                 <IconButton danger={true}>

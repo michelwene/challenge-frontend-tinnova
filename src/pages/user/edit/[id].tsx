@@ -16,6 +16,7 @@ export default function EditUser() {
         defaultValues={{
           name: userById?.name || '',
           document: userById?.document || '',
+          id: userById?.id || '',
           email: userById?.email || '',
           phone: userById?.phone || '',
         }}

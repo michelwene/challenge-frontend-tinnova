@@ -42,7 +42,7 @@ const formSchema = z.object({
 type FormInputs = z.infer<typeof formSchema>
 
 type Props = {
-  defaultValues?: FormInputs
+  defaultValues?: FormInputs & { id: string }
 }
 
 export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
@@ -58,12 +58,27 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
     defaultValues: defaultValues,
   })
 
-  const { createUser } = useUsersStorage()
+  const { createUser, editUser } = useUsersStorage()
 
   const { showNotification } = useNotification()
 
   const handleFormSubmit: SubmitHandler<FormInputs> = (formData) => {
     setIsLoading(true)
+    if (isEditing) {
+      setTimeout(() => {
+        editUser({
+          ...formData,
+          id: defaultValues?.id,
+        })
+        showNotification({
+          message: 'Usuário editado com sucesso!',
+          type: 'success',
+        })
+        setIsLoading(false)
+      }, 200)
+      return
+    }
+
     setTimeout(() => {
       createUser({
         ...formData,
