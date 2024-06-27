@@ -1,0 +1,18 @@
+export const colors = {
+  background: '#F6F8F9',
+  bgCard: '#fafafa',
+  bgDisabled: '#f6f6f6',
+  border: '#f0f0f0',
+  inputBorder: '#efeeed',
+  error: '#eb4a46',
+  placeholder: '#A2A2A2',
+  primary: '#00c8b3',
+  primaryFocus: '#333333',
+  scrollbarThumb: '#BFBFBF',
+  secondary: '#e6fff8',
+  success: '#007a76',
+  text: '#454851',
+  textDisabled: '#dddcdc',
+  title: '#232129',
+  white: '#FFFFFF',
+} as const

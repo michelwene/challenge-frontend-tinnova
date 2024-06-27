@@ -18,13 +18,16 @@
     "baseUrl": ".",
     "paths": {
       /* root */
-      "~assets/*": ["src/assets/*"],
       "~hooks": ["src/@hooks/index"],
-      "~types/*": ["src/@types/*"],
       "~utils": ["src/@utils/index"],
+      "~styles/*": ["src/styles/*"],
 
-      /* features */
-      "~features/*": ["src/features/index"]
+      /* components  */
+      "~form": ["src/components/@form/index"],
+      "~icons": ["src/components/@icons/index"],
+      "~ui": ["src/components/@ui/index"],
+      "~layout": ["src/components/@layout/index"],
+      "~features": ["src/components/@features/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs"],
