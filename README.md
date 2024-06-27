@@ -7,10 +7,10 @@ A solução é uma listagem de usuários com formulário de cadastro/edição.
 ## Instalação
 
 ```
-git clone https://github.com/michelwene/tinnova-teste.git
+git clone https://github.com/michelwene/challenge-frontend-tinnova.git
 ou
-git clone git@github.com:michelwene/tinnova-teste.git
-cd tinnova-teste
+git clone git@github.com:michelwene/challenge-frontend-tinnova.git
+cd challenge-frontend-tinnova
 yarn build
 yarn start
 ```
@@ -39,8 +39,8 @@ windows/linux
 ### Rodar em ambiente de desenvolvimento
 
 ```
-git clone git@github.com:michelwene/tinnova-teste.git | https://github.com/michelwene/tinnova-teste.git
-cd tinnova-teste
+git clone git@github.com:michelwene/challenge-frontend-tinnova.git | https://github.com/michelwene/challenge-frontend-tinnova.git
+cd challenge-frontend-tinnova
 yarn dev
 ```
 
