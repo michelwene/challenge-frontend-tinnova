@@ -3,7 +3,9 @@ import { useRouter } from 'next/router'
 import { useUsersStorage } from '~hooks'
 import { Empty } from '~ui'
 
+import * as S from './styles'
 import { TableRow } from './tableRow'
+
 export const Users = () => {
   const { users } = useUsersStorage()
   const router = useRouter()
@@ -13,13 +15,7 @@ export const Users = () => {
   }
 
   return (
-    <table
-      style={{
-        borderCollapse: 'collapse',
-        tableLayout: 'fixed',
-        width: '100%',
-      }}
-    >
+    <S.Table>
       <thead>
         <tr>
           <th>Nome</th>
@@ -46,6 +42,6 @@ export const Users = () => {
           </tr>
         )}
       </tbody>
-    </table>
+    </S.Table>
   )
 }

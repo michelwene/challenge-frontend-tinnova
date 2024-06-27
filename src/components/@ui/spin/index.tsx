@@ -1,19 +1,21 @@
 import * as S from './styles'
 
-type Props = {
-  size?: 'small' | 'middle' | 'large'
-}
-
 const sizes = {
   small: 16,
   middle: 24,
   large: 32,
+  xlarge: 48,
 }
 
-export const Spin = ({ size = 'large' }: Props) => {
+type Props = {
+  color?: string
+  size?: keyof typeof sizes
+}
+
+export const Spin = ({ color, size = 'large' }: Props) => {
   return (
     <S.Container>
-      <S.Spin size={sizes[size]} />
+      <S.Spin $color={color} size={sizes[size]} />
     </S.Container>
   )
 }

@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 import { LoadingIcon } from '~icons'
 
+type SpinProps = {
+  $color?: string
+}
+
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -9,9 +13,9 @@ export const Container = styled.div`
   width: 100%;
 `
 
-export const Spin = styled(LoadingIcon)`
+export const Spin = styled(LoadingIcon)<SpinProps>`
   animation: spin 1s linear infinite;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ $color, theme }) => $color ?? theme.colors.white};
 
   @keyframes spin {
     100% {

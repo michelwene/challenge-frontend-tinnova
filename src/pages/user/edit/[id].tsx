@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 
-import { FormCreateOrAlterUser } from '~features'
 import { useUsersStorage } from '~hooks'
 import { PageLayout } from '~layout'
+
+import { FormCreateOrAlterUser } from 'src/features'
 
 export default function EditUser() {
   const router = useRouter()

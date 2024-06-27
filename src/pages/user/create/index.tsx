@@ -1,5 +1,6 @@
-import { FormCreateOrAlterUser } from '~features'
 import { PageLayout } from '~layout'
+
+import { FormCreateOrAlterUser } from 'src/features'
 
 export default function CreateUser() {
   return (

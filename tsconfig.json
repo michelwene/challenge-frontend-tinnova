@@ -27,9 +27,7 @@
       "~icons": ["src/components/@icons/index"],
       "~ui": ["src/components/@ui/index"],
       "~layout": ["src/components/@layout/index"],
-
-      /* features */
-      "~features": ["src/features/index"]
+      "~features": ["src/components/@features/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs"],
