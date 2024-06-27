@@ -13,10 +13,11 @@ type User = {
 
 type UsersStorage = User[]
 
-export const USERS_STORAGE = '@tinn-users-selection-v1.0.0'
+export const USERS_STORAGE = '@tinnova-users-selection-v1.0.0'
 
 export const useUsersStorage = () => {
   const [storedUsers, setStoredUsers] = useSessionStorage<UsersStorage>({
+    defaultValue: [],
     key: USERS_STORAGE,
     getInitialValueInEffect: false,
     serialize: superjson.stringify,

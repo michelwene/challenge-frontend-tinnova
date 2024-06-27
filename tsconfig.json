@@ -26,6 +26,7 @@
       "~form": ["src/components/@form/index"],
       "~icons": ["src/components/@icons/index"],
       "~ui": ["src/components/@ui/index"],
+      "~layout": ["src/components/@layout/index"],
 
       /* features */
       "~features": ["src/features/index"]

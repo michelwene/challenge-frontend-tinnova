@@ -26,6 +26,15 @@ export const Input = styled.input<InputProps>`
   padding: 0.25rem;
   width: 100%;
 
+  &:disabled {
+    color: ${({ theme }) => theme.colors.textDisabled};
+    pointer-events: none;
+  }
+
+  &:hover {
+    cursor: text;
+  }
+
   ${({ $error }) =>
     $error &&
     css`
@@ -43,10 +52,17 @@ export const Label = styled.label<LabelProps>`
 
   transition: 0.3s ease all;
 
+  &:hover {
+    cursor: text;
+  }
+
   ${({ $focused }) =>
     $focused &&
     css`
       top: -10px;
       font-size: 0.75rem;
+      &:hover {
+        cursor: default;
+      }
     `}
 `
