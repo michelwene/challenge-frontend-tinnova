@@ -17,8 +17,9 @@ type LoaderContextProps = {
   setCustomLoaderState: Dispatch<SetStateAction<boolean>>
 }
 
-//@ts-expect-error -- Necessário para o funcionamento do createContext
-export const LoaderContext = createContext<LoaderContextProps>({})
+export const LoaderContext = createContext<LoaderContextProps>(
+  {} as LoaderContextProps,
+)
 
 type LoaderProviderProps = {
   children: ReactNode

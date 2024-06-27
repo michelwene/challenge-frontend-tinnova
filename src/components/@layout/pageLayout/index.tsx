@@ -16,6 +16,21 @@ type Props = {
   children: ReactNode
 }
 
+const actionButton = [
+  {
+    key: 'table',
+    label: 'Tabela de usuários',
+    icon: <S.UserIcon size={18} />,
+    path: '/',
+  },
+  {
+    key: 'create',
+    label: 'Cadastrar usuário',
+    icon: <S.UserAddIcon size={18} />,
+    path: '/user/create',
+  },
+]
+
 export const PageLayout = ({ children }: Props) => {
   const router = useRouter()
   return (
@@ -25,24 +40,18 @@ export const PageLayout = ({ children }: Props) => {
           <S.Title>Teste front-end tinnova</S.Title>
 
           <S.HeaderContainer>
-            <Button
-              buttonType='text'
-              shape='default'
-              size='middle'
-              onClick={() => router.push('/')}
-            >
-              <S.UserIcon size={18} />
-              Tabela de usuários
-            </Button>
-            <Button
-              buttonType='text'
-              shape='default'
-              size='middle'
-              onClick={() => router.push('/user/create')}
-            >
-              <S.UserAddIcon size={18} />
-              Cadastrar usuário
-            </Button>
+            {actionButton.map((item) => (
+              <Button
+                key={item.key}
+                buttonType='text'
+                shape='default'
+                size='middle'
+                onClick={() => router.push(item.path)}
+              >
+                {item.icon}
+                {item.label}
+              </Button>
+            ))}
           </S.HeaderContainer>
           <S.Content>{children}</S.Content>
         </S.Card>

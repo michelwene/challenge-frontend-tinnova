@@ -21,7 +21,6 @@ type Props = {
 
 export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
-  const isEditing = !!defaultValues
   const {
     control,
     formState: { errors },
@@ -36,16 +35,20 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
 
   const { showNotification } = useNotification()
 
+  const isEditing = !!defaultValues
+
   const handleFormSubmit: SubmitHandler<FormInputs> = (formData) => {
     setIsLoading(true)
+    const data = {
+      ...formData,
+      id: isEditing ? defaultValues.id : uuidv4(),
+      cpf: unMaskValue(formData.cpf),
+      phone: unMaskValue(formData.phone),
+    }
+
     if (isEditing) {
       setTimeout(() => {
-        editUser({
-          ...formData,
-          id: defaultValues?.id,
-          cpf: unMaskValue(formData.cpf),
-          phone: unMaskValue(formData.phone),
-        })
+        editUser(data)
         showNotification({
           message: 'Usuário editado com sucesso!',
           type: 'success',
@@ -56,12 +59,7 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
     }
 
     setTimeout(() => {
-      createUser({
-        ...formData,
-        id: uuidv4(),
-        cpf: unMaskValue(formData.cpf),
-        phone: unMaskValue(formData.phone),
-      })
+      createUser(data)
       showNotification({
         message: 'Usuário criado com sucesso!',
         type: 'success',
@@ -76,6 +74,7 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
     }, 200)
   }
 
+  const buttonSubmitText = isEditing ? 'Editar' : 'Cadastrar'
   const hasErrors = Object.keys(errors).length > 0
 
   return (
@@ -155,7 +154,7 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
         />
       </FormItem>
       <ButtonSubmit disabled={hasErrors} loading={isLoading}>
-        {isEditing ? 'Editar' : 'Cadastrar'}
+        {buttonSubmitText}
       </ButtonSubmit>
     </S.Form>
   )

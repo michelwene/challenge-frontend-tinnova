@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { useRouter } from 'next/router'
 
 import { useUsersStorage } from '~hooks'
@@ -6,23 +8,26 @@ import { Empty } from '~ui'
 import * as S from './styles'
 import { TableRow } from './tableRow'
 
+const tableHeaders = ['Nome', 'CPF', 'Telefone', 'E-mail', 'Ações']
+
 export const Users = () => {
   const { users } = useUsersStorage()
   const router = useRouter()
 
-  const handleEdit = (id: string) => {
-    void router.push(`/user/edit/${id}`)
-  }
+  const handleEdit = useCallback(
+    (id: string) => {
+      void router.push(`/user/edit/${id}`)
+    },
+    [router],
+  )
 
   return (
     <S.Table $isEmpty={!users?.length}>
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Telefone</th>
-          <th>E-mail</th>
-          <th>Ações</th>
+          {tableHeaders.map((header) => (
+            <th key={header}>{header}</th>
+          ))}
         </tr>
       </thead>
       <S.TableBody $isEmpty={!users?.length}>

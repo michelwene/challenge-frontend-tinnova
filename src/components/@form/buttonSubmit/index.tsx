@@ -5,7 +5,7 @@ import { Button } from '~ui'
 export const ButtonSubmit = ({
   children,
   ...rest
-}: ComponentProps<typeof Button>) => {
+}: Omit<ComponentProps<typeof Button>, 'type'>) => {
   return (
     <Button type='submit' {...rest}>
       {children}

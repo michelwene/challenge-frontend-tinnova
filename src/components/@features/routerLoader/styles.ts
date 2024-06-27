@@ -4,25 +4,27 @@ type Props = {
   $isOpen: boolean
 }
 export const Container = styled.div<Props>`
+  align-items: center;
   background: ${({ theme }) => theme.colors.background};
-  position: fixed;
-  z-index: -1;
+  color: ${({ theme }) => theme.colors.primary};
+  display: flex;
+  justify-content: center;
+
   inset: 0;
   width: 100vw;
   height: 100vh;
-  visibility: hidden;
+
   opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.primary};
+  position: fixed;
   transition: all 0.3s;
+  visibility: hidden;
+  z-index: -1;
 
   ${({ $isOpen }) =>
     $isOpen &&
     css`
-      z-index: 9999999999999;
       opacity: 1;
       visibility: visible;
+      z-index: 9999999999999;
     `}
 `
