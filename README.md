@@ -2,10 +2,6 @@
 
 # Lista de usuários ·
 
-![https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)
-
-![https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
-
 A solução é uma listagem de usuários com formulário de cadastro/edição.
 
 ## Instalação
