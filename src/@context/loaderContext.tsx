@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 import router from 'next/router'
 
@@ -11,11 +17,8 @@ type LoaderContextProps = {
   setCustomLoaderState: Dispatch<SetStateAction<boolean>>
 }
 
-export const LoaderContext = createContext<LoaderContextProps>({
-  customLoaderState: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function -- Necessário para iniciar o estado
-  setCustomLoaderState: () => {},
-})
+//@ts-expect-error -- Necessário para o funcionamento do createContext
+export const LoaderContext = createContext<LoaderContextProps>({})
 
 type LoaderProviderProps = {
   children: ReactNode
@@ -24,13 +27,13 @@ type LoaderProviderProps = {
 export const LoaderProvider = ({ children }: LoaderProviderProps) => {
   const [customLoaderState, setCustomLoaderState] = useState(false)
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     setCustomLoaderState(true)
-  }
+  }, [])
 
-  const handleStop = () => {
+  const handleStop = useCallback(() => {
     setCustomLoaderState(false)
-  }
+  }, [])
 
   useEffect(() => {
     router.events.on('routeChangeStart', handleStart)
@@ -42,7 +45,7 @@ export const LoaderProvider = ({ children }: LoaderProviderProps) => {
       router.events.off('routeChangeComplete', handleStop)
       router.events.off('routeChangeError', handleStop)
     }
-  }, [])
+  }, [handleStart, handleStop])
 
   return (
     <LoaderContext.Provider value={{ customLoaderState, setCustomLoaderState }}>

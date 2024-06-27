@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 import type { User } from 'src/@types/users'
 
@@ -10,6 +11,9 @@ class UsersService {
       )
       return data
     } catch {
+      toast('Error getting users', {
+        type: 'error',
+      })
       throw new Error('Error getting users')
     }
   }

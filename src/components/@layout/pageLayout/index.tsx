@@ -24,14 +24,7 @@ export const PageLayout = ({ children }: Props) => {
         <S.Card>
           <S.Title>Teste front-end tinnova</S.Title>
 
-          <S.HeaderContainer
-            style={{
-              alignItems: 'center',
-              display: 'flex',
-              gap: '0.5rem',
-              width: '100%',
-            }}
-          >
+          <S.HeaderContainer>
             <Button
               buttonType='text'
               shape='default'
@@ -48,7 +41,7 @@ export const PageLayout = ({ children }: Props) => {
               onClick={() => router.push('/user/create')}
             >
               <S.UserAddIcon size={18} />
-              Cadastro de usuários
+              Cadastrar usuário
             </Button>
           </S.HeaderContainer>
           <S.Content>{children}</S.Content>

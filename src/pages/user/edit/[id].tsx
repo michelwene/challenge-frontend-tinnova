@@ -10,7 +10,7 @@ export default function EditUser() {
   const router = useRouter()
   const { users } = useUsersStorage()
 
-  const userById = users.find((user) => user.id === router.query.id)
+  const userById = users?.find((user) => user.id === router.query.id)
 
   return (
     <PageLayout>

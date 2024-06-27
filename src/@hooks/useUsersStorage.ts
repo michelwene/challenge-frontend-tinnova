@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import type { User } from 'src/@types/users'
 import { usersService } from 'src/services'
-type UsersStorage = User[]
+type UsersStorage = User[] | undefined
 
 export const USERS_STORAGE = '@tinnova-users-selection-v1.0.0'
 
@@ -27,7 +27,7 @@ export const useUsersStorage = () => {
 
   const deleteUser = useCallback(
     (id: string) => {
-      setStoredUsers((prev) => prev.filter((user) => user.id !== id))
+      setStoredUsers((prev) => prev?.filter((user) => user.id !== id))
     },
     [setStoredUsers],
   )
@@ -35,13 +35,16 @@ export const useUsersStorage = () => {
   const editUser = useCallback(
     (user: User) => {
       setStoredUsers((prev) => {
-        const index = prev.findIndex((prevUser) => prevUser.id === user.id)
-        if (index === -1) return prev
+        if (prev) {
+          const index = prev.findIndex((prevUser) => prevUser.id === user.id)
+          if (index === -1) return prev
 
-        const newUsers = [...prev]
-        newUsers[index] = user
+          const newUsers = [...prev]
+          newUsers[index] = user
 
-        return newUsers
+          return newUsers
+        }
+        return prev
       })
     },
     [setStoredUsers],

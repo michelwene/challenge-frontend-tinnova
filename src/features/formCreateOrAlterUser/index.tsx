@@ -1,43 +1,17 @@
 import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { isCPF, isPhone } from 'brazilian-values'
 import type { SubmitHandler } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
-import { z } from 'zod'
+import type { z } from 'zod'
 
 import { ButtonSubmit, FormInput, FormItem } from '~form'
 import { useNotification, useUsersStorage } from '~hooks'
 import { maskCpf, maskPhoneNumber, unMaskValue } from '~utils'
 
+import { formSchema } from './schema'
 import * as S from './styles'
-const formSchema = z.object({
-  name: z
-    .string({
-      required_error: 'Nome é obrigatório',
-    })
-    .min(3, 'Campo deve conter 3 caracteres ou mais'),
-  cpf: z
-    .string({
-      required_error: 'CPF é obrigatório',
-    })
-    .refine((value) => {
-      return isCPF(value)
-    }, 'CPF inválido'),
-  phone: z
-    .string({
-      required_error: 'Telefone é obrigatório',
-    })
-    .refine((value) => {
-      return isPhone(value)
-    }, 'Telefone inválido'),
-  email: z
-    .string({
-      required_error: 'E-mail é obrigatório',
-    })
-    .email('E-mail inválido'),
-})
 
 type FormInputs = z.infer<typeof formSchema>
 
@@ -181,7 +155,7 @@ export const FormCreateOrAlterUser = ({ defaultValues }: Props) => {
         />
       </FormItem>
       <ButtonSubmit disabled={hasErrors} loading={isLoading}>
-        {isEditing ? 'Editar usuário' : 'Cadastrar'}
+        {isEditing ? 'Editar' : 'Cadastrar'}
       </ButtonSubmit>
     </S.Form>
   )

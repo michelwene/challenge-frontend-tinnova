@@ -55,6 +55,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   display: flex;
   gap: 0.5rem;
+  justify-content: space-between;
   width: 100%;
 
   @media (max-width: 768px) {
