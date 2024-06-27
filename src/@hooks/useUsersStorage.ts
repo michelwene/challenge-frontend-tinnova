@@ -1,17 +1,17 @@
 import { useCallback, useLayoutEffect } from 'react'
 
-import { useSessionStorage } from '@mantine/hooks'
+import { useLocalStorage } from '@mantine/hooks'
 import superjson from 'superjson'
+import { v4 as uuidv4 } from 'uuid'
 
 import type { User } from 'src/@types/users'
 import { usersService } from 'src/services'
-
 type UsersStorage = User[]
 
 export const USERS_STORAGE = '@tinnova-users-selection-v1.0.0'
 
 export const useUsersStorage = () => {
-  const [storedUsers, setStoredUsers] = useSessionStorage<UsersStorage>({
+  const [storedUsers, setStoredUsers] = useLocalStorage<UsersStorage>({
     key: USERS_STORAGE,
     getInitialValueInEffect: false,
     serialize: superjson.stringify,
@@ -20,7 +20,7 @@ export const useUsersStorage = () => {
 
   const createUser = useCallback(
     (user: User) => {
-      setStoredUsers((prev) => [...prev, user])
+      setStoredUsers((prev) => (prev ? [...prev, user] : [user]))
     },
     [setStoredUsers],
   )
@@ -51,7 +51,8 @@ export const useUsersStorage = () => {
     if (!storedUsers) {
       void (async () => {
         const data = await usersService.getUsers()
-        setStoredUsers(data)
+
+        setStoredUsers(data.map((user) => ({ ...user, id: uuidv4() })))
       })()
     }
   }, [setStoredUsers, storedUsers])
