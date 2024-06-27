@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router'
 
 import { useUsersStorage } from '~hooks'
-import { DeleteIcon, EditIcon } from '~icons'
-import { IconButton } from '~ui'
 
-import * as S from './styles'
+import { TableRow } from './tableRow'
 export const Users = () => {
   const { users } = useUsersStorage()
   const router = useRouter()
@@ -32,33 +30,11 @@ export const Users = () => {
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr key={user.id}>
-            <S.TableItem align='center' title={user.name}>
-              {user.name}
-            </S.TableItem>
-            <S.TableItem align='center'>{user.document}</S.TableItem>
-            <S.TableItem align='center'>{user.phone}</S.TableItem>
-            <S.TableItem align='center' title={user.email}>
-              {user.email}
-            </S.TableItem>
-            <S.TableItem align='center'>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '0.5rem',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <IconButton onClick={() => handleEdit(user.id)}>
-                  <EditIcon size={14} />
-                </IconButton>
-                <IconButton danger={true}>
-                  <DeleteIcon size={14} />
-                </IconButton>
-              </div>
-            </S.TableItem>
-          </tr>
+          <TableRow
+            key={user.id}
+            onEdit={() => handleEdit(user.id)}
+            user={user}
+          />
         ))}
       </tbody>
     </table>

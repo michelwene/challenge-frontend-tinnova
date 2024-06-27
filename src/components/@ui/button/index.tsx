@@ -46,7 +46,7 @@ export const ButtonComponent = (
       ref={ref}
       {...rest}
     >
-      {loading ? <Spin /> : children}
+      {loading ? <Spin size={size} /> : children}
     </S.Button>
   )
 }

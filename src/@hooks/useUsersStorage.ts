@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useSessionStorage } from '@mantine/hooks'
 import superjson from 'superjson'
 
-type User = {
+export type User = {
   id: string
   name: string
   document: string
@@ -31,7 +31,7 @@ export const useUsersStorage = () => {
     [setStoredUsers],
   )
 
-  const removeUser = useCallback(
+  const deleteUser = useCallback(
     (id: string) => {
       setStoredUsers((prev) => prev.filter((user) => user.id !== id))
     },
@@ -53,5 +53,5 @@ export const useUsersStorage = () => {
     [setStoredUsers],
   )
 
-  return { users: storedUsers, createUser, editUser, removeUser }
+  return { users: storedUsers, createUser, editUser, deleteUser }
 }
