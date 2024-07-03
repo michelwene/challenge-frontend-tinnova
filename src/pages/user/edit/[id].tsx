@@ -4,8 +4,7 @@ import { useUsersStorage } from '~hooks'
 import { PageLayout } from '~layout'
 import { maskCpf, maskPhoneNumber } from '~utils'
 
-import { FormCreateOrAlterUser } from 'src/features'
-import { NotFoundUser } from 'src/features/notFoundUser'
+import { FormCreateOrAlterUser, NotFoundUser } from 'src/features'
 
 export default function EditUser() {
   const router = useRouter()
